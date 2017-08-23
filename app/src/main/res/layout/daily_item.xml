@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    tools:background="@color/colorPrimary">
+
+
+    <TextView
+        android:id="@+id/dayTextView"
+        style="@style/ListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monday" />
+
+    <TextView
+        android:id="@+id/minTextView"
+        style="@style/ListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Min: 24 C"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/maxTextView"
+        style="@style/ListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Max: 32 C"
+        android:textAlignment="center" />
+</LinearLayout>
