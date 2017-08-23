@@ -14,12 +14,18 @@ import com.pablo384.kolorweather.API.API_KEY
 import com.pablo384.kolorweather.API.DARK_SKY_URL
 import com.pablo384.kolorweather.API.JSONParser
 import com.pablo384.kolorweather.R
+import com.pablo384.kolorweather.models.CurrentWeather
+import com.pablo384.kolorweather.models.Day
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
+    lateinit var days:ArrayList<Day>
+    companion object {
+        val DAILY_WEATHER="DAILY_WEATHER"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +48,18 @@ class MainActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.GET, url,
                 Response.Listener { response ->
-                    with(JSONParser().getCurrentWeatherJSON(JSONObject(response))) {
-                        descriptionTextView.text = summary
-                        precipTextView.text = getString(R.string.precip_placeholder, (precip * 100).toInt())
-                        tempTextView.text = getString(R.string.tem_placeholder, temp.toInt())
-                        iconImageView.setImageDrawable(resources.getDrawable(getIconResource()))
-                    }
+                    val responseJSON=JSONObject(response)
+                    buildCurrentWeather(JSONParser().getCurrentWeatherJSON(responseJSON))
+                    days = JSONParser().getDailyWeatherJSON(responseJSON)
                 },
                 Response.ErrorListener {displayErrorMessage()})
         queue.add(stringRequest)
+    }
+    fun buildCurrentWeather(weather:CurrentWeather){
+        descriptionTextView.text = weather.summary
+        precipTextView.text = getString(R.string.precip_placeholder, (weather.precip * 100).toInt())
+        tempTextView.text = getString(R.string.tem_placeholder, weather.temp.toInt())
+        iconImageView.setImageDrawable(resources.getDrawable(weather.getIconResource()))
     }
 
     private fun displayErrorMessage() {
@@ -60,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 })
         snackbar.show()
     }
-    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java))
+    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java)
+            .putParcelableArrayListExtra(DAILY_WEATHER, days))
     fun startDailyActivity(v:View)=startActivity(Intent(this,DailyWeatherActivity::class.java))
 }
