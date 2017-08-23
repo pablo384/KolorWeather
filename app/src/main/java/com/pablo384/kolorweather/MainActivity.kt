@@ -26,15 +26,15 @@ class MainActivity : AppCompatActivity() {
         val latitud = 37.8267
         val longitud = -122.4233
 
-        val url = "$DARK_SKY_URL$API_KEY/$latitud,$longitud"
+        val url = "$DARK_SKY_URL$API_KEY/$latitud,$longitud?lang=es&units=si"
         Log.d(TAG, url)
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.GET, url,
                 Response.Listener { response ->
                     with(JSONParser().getCurrentWeatherJSON(JSONObject(response))){
                         descriptionTextView.text=summary
-                        precipTextView.text=precip.toString()
-                        tempTextView.text=temp.toString()
+                        precipTextView.text="${precip.toString()} %"
+                        tempTextView.text="${temp.toString()} C"
                         iconImageView.setImageDrawable(resources.getDrawable(getIconResource()))
                     }
                 },

@@ -10,10 +10,12 @@ class JSONParser {
     fun getCurrentWeatherJSON(response:JSONObject):CurrentWeather{
         val currentJSON = response.getJSONObject(CURRENTLY)
         with(currentJSON){
-            return CurrentWeather(getString(ICON),
+            return CurrentWeather(
+                    getString(ICON),
                     getString(SUMMARY),
                     getDouble(TEMPERATURE),
-                    getDouble(PRECIPPROBABILITY))
+                    getDouble(PRECIPPROBABILITY)
+            )
         }
     }
 }
