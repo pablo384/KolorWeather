@@ -5,7 +5,7 @@ import com.pablo384.kolorweather.R
 /**
  * Created by pablo384 on 23/08/17.
  */
-class CurrentWeather(var icon:String, var summary:String, var temp:Double, var precip:Double){
+data class CurrentWeather(var icon:String, var summary:String, var temp:Double, var precip:Double){
     fun getIconResource():Int{
         when(icon){
             "clear-night"-> return R.drawable.clear_night

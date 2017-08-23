@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 })
         snackbar.show()
     }
-    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java)
+    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java))
+    fun startDailyActivity(v:View)=startActivity(Intent(this,DailyWeatherActivity::class.java)
             .putParcelableArrayListExtra(DAILY_WEATHER, days))
-    fun startDailyActivity(v:View)=startActivity(Intent(this,DailyWeatherActivity::class.java))
 }

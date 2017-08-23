@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by pablo384 on 23/08/17.
  */
-class Day(val time:Long, val minTemp:Double, val maxTemp:Double):Parcelable {
+data class Day(val time:Long, val minTemp:Double, val maxTemp:Double):Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readLong(),
             parcel.readDouble(),
