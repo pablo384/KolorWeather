@@ -14,6 +14,7 @@ class CurrentWeather(var icon:String, var summary:String, var temp:Double, var p
             "cloudy-night"-> return R.drawable.cloudy_night
             "partly-cloudy"-> return R.drawable.partly_cloudy
             "partly-cloudy-night"-> return R.drawable.partly_cloudy_night
+            "partly-cloudy-day"-> return R.drawable.partly_cloudy_day
             "rain"-> return R.drawable.rain
             "sleet"-> return R.drawable.sleet
             "snow"-> return R.drawable.snow

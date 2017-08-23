@@ -1,5 +1,6 @@
 package com.pablo384.kolorweather
 
+import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,9 @@ import com.pablo384.kolorweather.API.API_KEY
 import com.pablo384.kolorweather.API.DARK_SKY_URL
 import com.android.volley.VolleyError
 import com.android.volley.RequestQueue
+import com.pablo384.kolorweather.API.JSONParser
+import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +30,14 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, url)
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response -> Log.d(TAG, response.substring(0, 500))},
+                Response.Listener { response ->
+                    with(JSONParser().getCurrentWeatherJSON(JSONObject(response))){
+                        descriptionTextView.text=summary
+                        precipTextView.text=precip.toString()
+                        tempTextView.text=temp.toString()
+                        iconImageView.setImageDrawable(resources.getDrawable(getIconResource()))
+                    }
+                },
                 Response.ErrorListener { Log.d(TAG, "ERRROR Volley") })
         queue.add(stringRequest)
     }
