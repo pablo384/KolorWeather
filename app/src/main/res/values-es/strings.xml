@@ -12,4 +12,6 @@
     <string name="hourly_weather">Clima por Hora</string>
     <string name="language">es</string>
     <string name="units">si</string>
+    <string name="network_error">ERROR DE RED</string>
+    <string name="retry">Reintentar?</string>
 </resources>

@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:id="@+id/main"
-    tools:context="com.pablo384.kolorweather.MainActivity">
+    tools:context="com.pablo384.kolorweather.UI.MainActivity">
 
     <TextView
         android:id="@+id/localizationTextView"
@@ -125,6 +125,7 @@
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
+        android:onClick="startDailyActivity"
         android:text="@string/daily_weather"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -140,6 +141,7 @@
         android:layout_marginBottom="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
+        android:onClick="startHourlyActivity"
         android:text="@string/hourly_weather"
         android:textAlignment="center"
         android:textStyle="bold"
