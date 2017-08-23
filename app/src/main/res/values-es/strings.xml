@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Kolor Weather</string>
     <string name="imagen_de_clima">Imagen de clima</string>
     <string name="alcatraz_california">Alcatraz, California</string>
-    <string name="no_data">No Data</string>
+    <string name="no_data">No Datos</string>
     <string name="tem_placeholder">%d C</string>
     <string name="precip_placeholder">%d %%</string>
     <string name="precip">PRECIP</string>
     <string name="temp">TEMP</string>
-    <string name="daily_weather">DAILY WEATHER</string>
-    <string name="hourly_weather">HOURLY WEATHER</string>
-    <string name="language">en</string>
+    <string name="daily_weather">Clima Diario</string>
+    <string name="hourly_weather">Clima por Hora</string>
+    <string name="language">es</string>
     <string name="units">si</string>
 </resources>
