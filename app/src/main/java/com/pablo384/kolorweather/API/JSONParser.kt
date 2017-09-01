@@ -46,7 +46,8 @@ fun getHourlyWeatherJSON(response: JSONObject): ArrayList<Hour> {
                 val time = getLong(TIME)
                 val temp = getDouble(TEMPERATURE)
                 val precip = getDouble(PRECIPPROBABILITY)
-                hour.add(Hour(time, temp, precip))
+                val timeZone = getString(TIMEZONE)
+                hour.add(Hour(time, temp, precip, timeZone))
             }
         }
         return hour
