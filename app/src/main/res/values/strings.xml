@@ -15,5 +15,7 @@
     <string name="retry">RETRY?</string>
     <string name="summary_of_the_week">Summary of the Week</string>
     <string name="daily_weather_d">Daily Weather</string>
+    <string name="hourly_weather_d">Hourly Weather</string>
+    <string name="summary_of_the_day">Summary of the Day</string>
 
 </resources>
