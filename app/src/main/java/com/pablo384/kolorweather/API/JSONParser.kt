@@ -3,6 +3,7 @@ package com.pablo384.kolorweather.API
 import com.pablo384.kolorweather.models.CurrentWeather
 import com.pablo384.kolorweather.models.Day
 import com.pablo384.kolorweather.Extensions.iterator
+import com.pablo384.kolorweather.models.Hour
 import org.json.JSONObject
 
 /**
@@ -34,5 +35,20 @@ fun getDailyWeatherJSON(response: JSONObject): ArrayList<Day> {
 
         }
         return days
+    }
+}
+fun getHourlyWeatherJSON(response: JSONObject): ArrayList<Hour> {
+    with(response.getJSONObject(HOURLY)) {
+        val hourArray = getJSONArray(DATA)
+        val hour = ArrayList<Hour>()
+        for (i in hourArray) {
+            with(i) {
+                val time = getLong(TIME)
+                val temp = getDouble(TEMPERATURE)
+                val precip = getDouble(PRECIPPROBABILITY)
+                hour.add(Hour(time, temp, precip))
+            }
+        }
+        return hour
     }
 }

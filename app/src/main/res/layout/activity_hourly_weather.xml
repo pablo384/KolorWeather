@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/dailyRecyclerView"
+        android:id="@+id/hourlyRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -50,8 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subTitleTextView"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/subTitleTextView" />
 
     <TextView
         android:id="@+id/textViewNoData"

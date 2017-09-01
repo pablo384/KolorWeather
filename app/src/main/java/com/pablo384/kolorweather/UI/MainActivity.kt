@@ -16,6 +16,7 @@ import com.pablo384.kolorweather.Extensions.displaySnack
 import com.pablo384.kolorweather.R
 import com.pablo384.kolorweather.models.CurrentWeather
 import com.pablo384.kolorweather.models.Day
+import com.pablo384.kolorweather.models.Hour
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -23,8 +24,10 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
     var days:ArrayList<Day> = ArrayList()
+    var hours:ArrayList<Hour> = ArrayList()
     companion object {
         val DAILY_WEATHER="DAILY_WEATHER"
+        val HOURLY_WEATHER="HOURLY_WEATHER"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,8 @@ class MainActivity : AppCompatActivity() {
                     val responseJSON=JSONObject(it)
                     buildCurrentWeather(getCurrentWeatherJSON(responseJSON))
                     days = getDailyWeatherJSON(responseJSON)
+                    hours= getHourlyWeatherJSON(responseJSON)
+                    Log.d("TAG123", hours[0].toString())
                 },
                 Response.ErrorListener {
                     errorDisplayMessage()
@@ -74,7 +79,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java))
+    fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java)
+            .putParcelableArrayListExtra(HOURLY_WEATHER, hours))
     fun startDailyActivity(v:View)=startActivity(Intent(this,DailyWeatherActivity::class.java)
             .putParcelableArrayListExtra(DAILY_WEATHER, days))
 }
