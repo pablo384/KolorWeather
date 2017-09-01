@@ -17,11 +17,10 @@ class DailyWeatherActivity : AppCompatActivity() {
         intent.let {
             //rellenar Lista
             val days:ArrayList<Day> = it.getParcelableArrayListExtra(MainActivity.DAILY_WEATHER)
-            Log.d("TAG123456",days.get(0).toString())
-
             val adapter = DayAdapter(context = this,dataSource = days)
             dailyListView.adapter=adapter
 
         }
+        dailyListView.emptyView=textViewNoData
     }
 }

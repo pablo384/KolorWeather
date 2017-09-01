@@ -10,9 +10,9 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.pablo384.kolorweather.API.API_KEY
-import com.pablo384.kolorweather.API.DARK_SKY_URL
-import com.pablo384.kolorweather.API.JSONParser
+import com.pablo384.kolorweather.API.*
+import com.pablo384.kolorweather.Extensions.action
+import com.pablo384.kolorweather.Extensions.displaySnack
 import com.pablo384.kolorweather.R
 import com.pablo384.kolorweather.models.CurrentWeather
 import com.pablo384.kolorweather.models.Day
@@ -22,7 +22,7 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
-    lateinit var days:ArrayList<Day>
+    var days:ArrayList<Day> = ArrayList()
     companion object {
         val DAILY_WEATHER="DAILY_WEATHER"
     }
@@ -47,14 +47,25 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, url)
         val queue = Volley.newRequestQueue(this)
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener { response ->
-                    val responseJSON=JSONObject(response)
-                    buildCurrentWeather(JSONParser().getCurrentWeatherJSON(responseJSON))
-                    days = JSONParser().getDailyWeatherJSON(responseJSON)
+                Response.Listener {
+                    val responseJSON=JSONObject(it)
+                    buildCurrentWeather(getCurrentWeatherJSON(responseJSON))
+                    days = getDailyWeatherJSON(responseJSON)
                 },
-                Response.ErrorListener {displayErrorMessage()})
+                Response.ErrorListener {
+                    errorDisplayMessage()
+                })
         queue.add(stringRequest)
     }
+
+    private fun errorDisplayMessage() {
+        main.displaySnack(getString(R.string.network_error),Snackbar.LENGTH_LONG){
+            action(getString(R.string.retry)){
+                getWeather()
+            }
+        }
+    }
+
     fun buildCurrentWeather(weather:CurrentWeather){
         descriptionTextView.text = weather.summary
         precipTextView.text = getString(R.string.precip_placeholder, (weather.precip * 100).toInt())
@@ -62,13 +73,7 @@ class MainActivity : AppCompatActivity() {
         iconImageView.setImageDrawable(resources.getDrawable(weather.getIconResource()))
     }
 
-    private fun displayErrorMessage() {
-        val snackbar = Snackbar.make(main, getString(R.string.network_error), Snackbar.LENGTH_INDEFINITE)
-                .setAction(getString(R.string.retry), {
-                    getWeather()
-                })
-        snackbar.show()
-    }
+
     fun startHourlyActivity(v:View)=startActivity(Intent(this,HourlyWeatherActivity::class.java))
     fun startDailyActivity(v:View)=startActivity(Intent(this,DailyWeatherActivity::class.java)
             .putParcelableArrayListExtra(DAILY_WEATHER, days))

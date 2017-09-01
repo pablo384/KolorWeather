@@ -37,9 +37,6 @@ class DayAdapter (val context: Context, val dataSource:ArrayList<Day>): BaseAdap
         vh.dayTextView.text=dataSource[position].getFormattedTime()
         vh.maxTextView.text="Max ${dataSource[position].maxTemp.toString()} C"
         vh.minTextView.text="Min ${dataSource[position].minTemp.toString()} C"
-
-
-
         return view
     }
 
