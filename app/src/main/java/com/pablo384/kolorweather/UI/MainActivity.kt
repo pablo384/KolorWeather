@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                     buildCurrentWeather(getCurrentWeatherJSON(responseJSON))
                     days = getDailyWeatherJSON(responseJSON)
                     hours= getHourlyWeatherJSON(responseJSON)
-                    Log.d("TAG123", hours[0].toString())
                 },
                 Response.ErrorListener {
                     errorDisplayMessage()
