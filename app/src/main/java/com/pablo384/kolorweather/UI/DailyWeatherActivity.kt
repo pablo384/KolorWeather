@@ -3,8 +3,10 @@ package com.pablo384.kolorweather.UI
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.pablo384.kolorweather.Adapters.DayAdapter
 import com.pablo384.kolorweather.R
 import com.pablo384.kolorweather.models.Day
+import kotlinx.android.synthetic.main.activity_daily_weather.*
 
 class DailyWeatherActivity : AppCompatActivity() {
 
@@ -15,7 +17,11 @@ class DailyWeatherActivity : AppCompatActivity() {
         intent.let {
             //rellenar Lista
             val days:ArrayList<Day> = it.getParcelableArrayListExtra(MainActivity.DAILY_WEATHER)
-            Log.d("TAG",days.get(0).toString())
+            Log.d("TAG123456",days.get(0).toString())
+
+            val adapter = DayAdapter(context = this,dataSource = days)
+            dailyListView.adapter=adapter
+
         }
     }
 }
